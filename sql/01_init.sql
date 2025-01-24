@@ -2,8 +2,23 @@ CREATE TABLE IF NOT EXISTS users (
 	    id INT AUTO_INCREMENT PRIMARY KEY,
 	    name VARCHAR(255) NOT NULL,
 	    email VARCHAR(255) UNIQUE NOT NULL,
+        session_token VARCHAR(255) DEFAULT NULL,
+        session_last_active DATETIME DEFAULT NULL
 	    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);
+
+    DELIMITER //
+
+    CREATE TRIGGER invalidate_sessions BEFORE UPDATE ON users
+    FOR EACH ROW
+    BEGIN
+        IF NEW.session_last_active IS NOT NULL AND TIMESTAMPDIFF(MINUTE, NEW.session_last_active, NOW()) > 5 THEN
+            SET NEW.session_token = NULL;
+            SET NEW.session_last_active = NULL;
+        END IF;
+    END //
+
+    DELIMITER ;
 
 	INSERT INTO users (name, email) VALUES
 	('John Doe', 'john.doe@example.com'),

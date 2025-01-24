@@ -6,7 +6,8 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli
 
 # Habilitar exibição de erros no PHP
 RUN echo "display_errors=On\n" >> /usr/local/etc/php/conf.d/docker-php.ini \
-    && echo "error_reporting=${PHP_ERROR_REPORTING}\n" >> /usr/local/etc/php/conf.d/docker-php.ini
+#    && echo "error_reporting=${PHP_ERROR_REPORTING}\n" >> /usr/local/etc/php/conf.d/docker-php.ini
+    && echo "error_reporting=E_ALL\n" >> /usr/local/etc/php/conf.d/docker-php.ini
 
 # Copiar os arquivos para o servidor web
 COPY ./src /var/www/html

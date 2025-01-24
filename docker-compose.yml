@@ -26,7 +26,8 @@ services:
     volumes:
       - ./php/src:/var/www/html
     environment:
-      PHP_ERROR_REPORTING: "E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED"
+      # Não está lendo a variavel abaixo ao subir o docker
+#     PHP_ERROR_REPORTING: "E_ALL & ~E_NOTICE & ~E_STRICT & ~E_DEPRECATED"
       MYSQL_HOST: mysql
       MYSQL_DATABASE: ${MYSQL_DATABASE}
       MYSQL_USER: ${MYSQL_USER}
