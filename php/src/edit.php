@@ -27,13 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['edit_form'] === 'edit_form'
         $stmt->bindParam(':job_link_hash', $job_link_hash);
 
         $stmt->execute();
-        echo "UPDATE applications 
-            SET company_name = '$company_name', 
-                job_title = '$job_title', 
-                status = '$status', 
-                return_date = '$return_date', 
-                updated_at = NOW()
-            WHERE job_link_hash = '$job_link_hash';";
+        //echo "UPDATE applications SET company_name = '$company_name', job_title = '$job_title', status = '$status', return_date = '$return_date', updated_at = NOW() WHERE job_link_hash = '$job_link_hash';";
 
         if ($stmt->rowCount() > 0) {
             echo "<div class='alert alert-success' role='alert'>Vaga atualizada com sucesso!</div>";
