@@ -24,8 +24,8 @@ CREATE TABLE IF NOT EXISTS users (
     DELIMITER ;
 
 	INSERT INTO users (name, email) VALUES
-	('John Doe', 'john.doe@example.com'),
-	('Jane Smith', 'jane.smith@example.com');
+	('John Doe', 'teste@teste.com'),
+	('Jane Smith', 'teste2@teste.com');
 
 -- Criação do banco de dados, se não existir
 -- CREATE DATABASE IF NOT EXISTS my_database;
