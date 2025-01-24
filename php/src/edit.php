@@ -2,7 +2,7 @@
 require_once 'database.php'; // Inclui a classe de conexão
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['edit_form'] === 'edit_form') {
-    $job_link = $_POST['job_link'];
+    $job_link_hash = $_POST['job_link_hash'];
     $company_name = $_POST['company_name'];
     $job_title = $_POST['job_title'];
     $status = $_POST['status'];
@@ -27,9 +27,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['edit_form'] === 'edit_form'
         $stmt->bindParam(':job_link_hash', $job_link_hash);
 
         $stmt->execute();
+        echo "UPDATE applications 
+            SET company_name = '$company_name', 
+                job_title = '$job_title', 
+                status = '$status', 
+                return_date = '$return_date', 
+                updated_at = NOW()
+            WHERE job_link_hash = '$job_link_hash';";
 
-        echo "<div class='alert alert-success' role='alert'>Vaga atualizada com sucesso!</div>";
-        echo "<a href='edit.php' class='btn btn-info'>Voltar para edição</a>";
+        if ($stmt->rowCount() > 0) {
+            echo "<div class='alert alert-success' role='alert'>Vaga atualizada com sucesso!</div>";
+            echo "<a href='edit.php' class='btn btn-info'>Voltar para edição</a>";
+            } else {
+            echo "Nenhuma linha foi atualizada. Verifique os dados enviados.";
+        }        
     } catch (PDOException $e) {
         echo "<h1>Erro ao atualizar o banco de dados:</h1>";
         echo "<p>" . $e->getMessage() . "</p>";
