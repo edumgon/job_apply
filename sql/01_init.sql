@@ -9,13 +9,16 @@ CREATE TABLE IF NOT EXISTS users (
 
     DELIMITER //
 
-    CREATE TRIGGER invalidate_sessions BEFORE UPDATE ON users
-    FOR EACH ROW
+    CREATE EVENT invalidate_sessions
+    ON SCHEDULE EVERY 1 MINUTE
+    DO
     BEGIN
-        IF NEW.session_last_active IS NOT NULL AND TIMESTAMPDIFF(MINUTE, NEW.session_last_active, NOW()) > 5 THEN
-            SET NEW.session_token = NULL;
-            SET NEW.session_last_active = NULL;
-        END IF;
+        -- Atualiza as sessões inativas (mais de 5 minutos)
+        UPDATE users
+        SET session_token = NULL,
+            session_last_active = NULL
+        WHERE session_last_active IS NOT NULL
+        AND TIMESTAMPDIFF(MINUTE, session_last_active, NOW()) > 5;
     END //
 
     DELIMITER ;
