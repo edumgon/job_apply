@@ -2,8 +2,8 @@ CREATE TABLE IF NOT EXISTS users (
 	    id INT AUTO_INCREMENT PRIMARY KEY,
 	    name VARCHAR(255) NOT NULL,
 	    email VARCHAR(255) UNIQUE NOT NULL,
-            session_token VARCHAR(255) DEFAULT NULL,
-            session_last_active DATETIME DEFAULT NULL,
+	    session_token VARCHAR(255) DEFAULT NULL,
+	    session_last_active DATETIME DEFAULT NULL,
 	    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	);
 
