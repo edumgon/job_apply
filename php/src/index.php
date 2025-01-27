@@ -61,8 +61,9 @@ function renderApplications()
                     <tbody>";
 
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $link = substr($row['job_link'],8,17);
                 echo "<tr>
-                        <td><a href='{$row['job_link']}' target='_blank'>{$row['job_link']}</a></td>
+                        <td><a href='{$row['job_link']}' target='_blank'>{$link}</a></td>
                         <td>{$row['company_name']}</td>
                         <td>{$row['job_title']}</td>
                         <td>{$row['application_date']}</td>
