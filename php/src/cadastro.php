@@ -85,6 +85,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Cadastrar Candidatura</title>
     <!-- Inclui o Bootstrap -->
     <link href="bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Hamburger menu */
+        .hamburger-menu {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .menu-icon {
+            cursor: pointer;
+            padding: 10px;
+            background: transparent;
+            border: none;
+        }
+
+        .menu-icon span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: #17a2b8;
+            margin: 5px 0;
+            transition: 0.4s;
+        }
+
+        .menu-links {
+            position: fixed;
+            top: 60px;
+            right: 20px;
+            background-color: #1e1e1e;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .menu-links.show {
+            display: block;
+        }
+
+        .menu-links a {
+            display: block;
+            color: #17a2b8;
+            text-decoration: none;
+            padding: 10px 20px;
+            white-space: nowrap;
+        }
+
+        .menu-links a:hover {
+            background-color: #373737;
+            color: #ffffff;
+            border-radius: 3px;
+        }
+    </style>
 </head>
 <body>
     <div class="container my-4">
@@ -129,5 +183,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
     <!-- Scripts do Bootstrap -->
     <script src="bootstrap.bundle.min.js"></script>
+    <!-- Navbar -->
+    <div class="hamburger-menu">
+        <button class="menu-icon" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <div class="menu-links" id="menuLinks">
+            <a href="index.php">Home</a>
+            <a href="cadastro.php">Cadastro</a>
+            <a href="edit.php">Editar</a>
+            <a href="logout.php">Sair</a>
+        </div>
+    </div>
+    <!-- Script para o menu responsivo -->
+    <script>
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        document.getElementById('menuLinks').classList.toggle('show');
+    });
+
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('menuLinks');
+        const menuButton = document.getElementById('menuToggle');
+        
+        if (!menuButton.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.remove('show');
+        }
+    });
+    </script>
 </body>
 </html>
