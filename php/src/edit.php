@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_POST['edit_form'] === 'edit_form'
             echo "<option value='entrevista' " . ($application['status'] === 'entrevista' ? 'selected' : '') . ">Entrevista</option>";
             echo "<option value='proposta' " . ($application['status'] === 'proposta' ? 'selected' : '') . ">Proposta</option>";
             echo "<option value='aprovado' " . ($application['status'] === 'aprovado' ? 'selected' : '') . ">Aprovado</option>";
-            echo "<option value='negado' " . ($application['status'] === 'negado' ? 'selected' : '') . ">Negado</option>";
+            echo "<option value='negada' " . ($application['status'] === 'negado' ? 'selected' : '') . ">Negado</option>";
             echo "</select><br><br>";
             echo "</div>";
 
