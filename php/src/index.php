@@ -54,7 +54,7 @@ function renderApplications()
         echo "<form method='GET' class='mb-3'>";
         echo "<label for='status'>Filtrar por Status:</label> ";
         echo "<select name='status' id='status' onchange='this.form.submit()'>";
-        echo "<option value=''>Todos</option>";
+        echo "<option value=''>Todos (-negada)</option>";
         $statusOptions = ['inicial', 'entrevista', 'proposta', 'negada', 'aprovado'];
         foreach ($statusOptions as $option) {
             $selected = ($statusFilter == $option) ? "selected" : "";
