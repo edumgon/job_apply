@@ -39,11 +39,11 @@ function renderApplications()
         // Verifica se há um filtro de status
         $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
         // Consulta para listar todas as candidaturas
-        $query = "SELECT * FROM applications";
+        $query = "SELECT * FROM applications ";
         if (!empty($statusFilter)) {
             $query .= " WHERE status = \"$statusFilter\" ";
         } else {
-            $query .= "WHERE status not in (\"negada\") ";
+            $query .= " WHERE status not in (\"negada\") ";
         }
         $query .= " ORDER BY application_date DESC";
         
@@ -54,7 +54,7 @@ function renderApplications()
         echo "<form method='GET' class='mb-3'>";
         echo "<label for='status'>Filtrar por Status:</label> ";
         echo "<select name='status' id='status' onchange='this.form.submit()'>";
-        echo "<option value=''>Todos(-negadas)</option>";
+        echo "<option value=''>Todos</option>";
         $statusOptions = ['inicial', 'entrevista', 'proposta', 'negada', 'aprovado'];
         foreach ($statusOptions as $option) {
             $selected = ($statusFilter == $option) ? "selected" : "";
