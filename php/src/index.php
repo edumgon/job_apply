@@ -36,6 +36,10 @@ function renderApplications()
 {
     $db = DatabaseConnection::getInstance()->getConnection();
     try {
+        
+        //cria tabela 100% responsiva
+        echo "<div class='table-responsive'><table width='100%'><tr><td>";
+
         //Realiza contagem de candidaturas por status
         $query = "SELECT status, COUNT(*) as total FROM applications GROUP BY status";
         $stmt = $db->query($query);
@@ -57,7 +61,8 @@ function renderApplications()
         }
         echo "</tbody></table>";
         echo "</div>";
-            
+
+        echo "</td><td align='right'>";
 
         // Verifica se há um filtro de status
         $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
@@ -87,6 +92,7 @@ function renderApplications()
         echo "</form>";
         echo "</div>";
 
+        echo "</td></tr></table></div>";
 
         // Verifica se há resultados
         if ($stmt->rowCount() > 0) {
