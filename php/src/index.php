@@ -36,6 +36,29 @@ function renderApplications()
 {
     $db = DatabaseConnection::getInstance()->getConnection();
     try {
+        //Realiza contagem de candidaturas por status
+        $query = "SELECT status, COUNT(*) as total FROM applications GROUP BY status";
+        $stmt = $db->query($query);
+        $statusCount = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo "<div class='table-responsive'>";
+        echo "<table class='table table-dark table-striped table-bordered rounded'>
+                <thead class='thead-dark'>
+                    <tr>
+                        <th>Status</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>";
+        foreach ($statusCount as $row) {
+            echo "<tr>
+                    <td>{$row['status']}</td>
+                    <td>{$row['total']}</td>
+                   </tr>";
+        }
+        echo "</tbody></table>";
+        echo "</div>";
+            
+
         // Verifica se há um filtro de status
         $statusFilter = isset($_GET['status']) ? $_GET['status'] : '';
         // Consulta para listar todas as candidaturas
@@ -104,6 +127,8 @@ function renderApplications()
             }
             echo "</tbody></table>";
             echo "</div>";
+
+
         } else {
             echo "<p class='alert alert-info text-center'>Nenhuma candidatura encontrada.</p>";
         }
